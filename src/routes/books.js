@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const {data} = require("express-session/session/cookie");
 const router = express.Router();
 
 // Function to read books from JSON file
@@ -179,7 +178,7 @@ module.exports = (app) => {
             return res.status(200).json(updatedBook);
         } catch (err) {
             console.error('Error updating book:', err);
-            return res.status(500).json({message: 'Error updating book', error: err.message});
+            return res.status(500).json({message: 'An error occurred while attempting to update the book', error: err.message});
         }
     });
 
@@ -190,7 +189,7 @@ module.exports = (app) => {
             const bookIndex = data.books.findIndex(b => b.id === req.params.id);
 
             if (bookIndex === -1) {
-                return res.status(404).json({message: 'Book not found'});
+                return res.status(404).json({message: 'The book you are looking for is not found'});
             }
 
             // Remove book from array
@@ -202,7 +201,7 @@ module.exports = (app) => {
             return res.status(200).json({message: 'Book deleted successfully'});
         } catch (err) {
             console.error('Error deleting book:', err);
-            return res.status(500).json({message: 'Error deleting book', error: err.message});
+            return res.status(500).json({message: 'An error occurred while attempting to delete the book', error: err.message});
         }
     });
 
