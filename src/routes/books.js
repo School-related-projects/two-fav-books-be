@@ -153,7 +153,12 @@ module.exports = (app) => {
     router.put('/:id', (req, res) => {
         try {
             const data = getBooksData();
-            const bookIndex = data.books.findIndex(b => b.id === req.params.id);
+            const bookIndex = data.books.findIndex(b => b.id === req.params.id); 
+            /**
+            * Ensuring to stringify for id before checking?
+            * like this:
+            * const book = data.books.find(b => b.id.toString() === req.params.id);
+            */
 
             if (bookIndex === -1) {
                 return res.status(404).json({message: 'Book not found'});
