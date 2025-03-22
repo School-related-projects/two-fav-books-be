@@ -1,11 +1,11 @@
 const express = require('express');
-
+require('dotenv').config();
 
 const app = express();
 
 const loaders = require("./src/loaders");
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 async function startServer() {
     // Init application loaders
