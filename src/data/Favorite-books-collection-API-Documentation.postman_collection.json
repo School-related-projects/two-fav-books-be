@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "2bb10eb2-3cd2-469d-87ae-7527be3d1660",
+		"name": "Favorite-books-collection-API-Documentation",
+		"description": "## **Generic information**\n\n- Base URL: [http://localhost:8000](http://localhost:3000/api)\n    \n- API Books: [/api/books](http://localhost:3000/api)\n    \n- Content-Type: application/json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34250019"
+	},
+	"item": [
+		{
+			"name": "All Books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/{{ENDPOINT_BOOKS}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"{{ENDPOINT_BOOKS}}"
+					]
+				},
+				"description": "**Request Method**: GET  \n**URL**: `/api/books`  \n**Parameters**: None  \n**Authentication**: None\n\n**Response Format**: JSON Array of books\n\n**Example Response** (200 OK):\n\n``` json\n[\n  {\n    \"id\": \"1678954321\",\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"year\": 1960,\n    \"genre\": \"Fiction\",\n    \"summary\": \"The story of racial injustice in a small Southern town\",\n    \"cover\": \"/resources/images/mockingbird.jpg\"\n  },\n  {\n    \"id\": \"1678954322\",\n    \"title\": \"1984\",\n    \"author\": \"George Orwell\",\n    \"year\": 1949,\n    \"genre\": \"Dystopian\",\n    \"summary\": \"A chilling portrait of a totalitarian regime\",\n    \"cover\": \"/resources/images/1984.jpg\"\n  }\n]\n\n ```\n\n**Error Handling**:\n\n- 404 Page not found: No books exists\n    \n- 500 Internal Server Error: If there's an issue with the server"
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/{{ENDPOINT_BOOKS}}/14",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"{{ENDPOINT_BOOKS}}",
+						"14"
+					]
+				},
+				"description": "**Request Method**: GET  \n**URL**: `/api/books/:id`  \n**Parameters**:\n\n- `id` (path parameter): The unique identifier of the book\n    \n\n**Response Format**: JSON Object of a single book\n\n**Example Request**: GET `/api/books/13`\n\n**Example Response** (200 OK):\n\n``` json\n{\n  \"id\": \"13\",\n  \"title\": \"To Kill a Mockingbird\",\n  \"author\": \"Harper Lee\",\n  \"year\": 1960,\n  \"genre\": \"Fiction\",\n  \"summary\": \"The story of racial injustice in a small Southern town\",\n  \"cover\": \"/resources/images/mockingbird.jpg\"\n}\n\n ```\n\n**Error Handling**:\n\n- 404 Not Found: If the book with the specified ID does not exist\n    \n- 500 Internal Server Error: If there's an issue with the server"
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n    \"id\": 12,\n    \"title\": \"At The Existentialist Café\",\n    \"author\": \"Sarah Bakewell\",\n    \"year\": 2016,\n    \"summary\":\"At the Existentialist Café tells the story of modern existentialism as one of passionate encounters between people, minds and ideas. From the ‘king and queen of existentialism’ – Sartre and de Beauvoir – to their wider circle of friends and adversaries including Albert Camus, Martin Heidegger, Maurice Merleau-Ponty and Iris Murdoch, this book is an enjoyable and original journey through a captivating intellectual movement.\",\n    \"genre\": \"Philosophy\",\n    \"cover\": \"./resources/images/at-the-existentialist-cafe.jpg\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/{{ENDPOINT_BOOKS}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"{{ENDPOINT_BOOKS}}"
+					]
+				},
+				"description": "With this request you can add a new book"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Specific Book",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"genre\": \"Psychological Fiction\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/books/1742323795091",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"books",
+						"1742323795091"
+					]
+				},
+				"description": "### 3\\. Add a New Book\n\n**Request Method**: POST  \n**URL**: `/api/books`  \n**Headers**:\n\n- Content-Type: application/json\n    \n\n**Request Body**: JSON object with book details\n\n- Required fields: title, author\n    \n- Optional fields: id, year, genre, summary, cover\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"title\": \"The Great Gatsby\",\n  \"author\": \"F. Scott Fitzgerald\",\n  \"year\": 1925,\n  \"genre\": \"Fiction\",\n  \"summary\": \"A portrait of the Jazz Age in all of its decadence and excess\",\n  \"cover\": \"/resources/images/gatsby.jpg\"\n}\n\n ```\n\n**Response Format**: JSON Object of the created book with assigned ID\n\n**Example Response** (201 Created):\n\n``` json\n{\n \"id\": \"1678954323\",\n \"title\": \"The Great Gatsby\",\n \"author\": \"F. Scott Fitzgerald\",\n \"year\": 1925,\n \"genre\": \"Fiction\",\n \"summary\": \"A portrait of the Jazz Age in all of its decadence and excess\",\n \"cover\": \"/resources/images/gatsby.jpg\"\n}\n\n ```\n\n**Error Handling**:\n\n- 400 Bad Request: If required fields (title, author) are missing\n    \n- 500 Internal Server Error: If there's an issue with the serve"
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/{{ENDPOINT_BOOKS}}/3",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"{{ENDPOINT_BOOKS}}",
+						"3"
+					]
+				},
+				"description": "### 5\\. Delete a Book\n\n**Request Method**: DELETE  \n**URL**: `/api/books/:id`  \n**Parameters**:\n\n- `id` (path parameter): The unique identifier of the book to delete\n    \n\n**Example Request**: DELETE `/api/books/1678954321`\n\n**Response Format**: JSON Object with success message\n\n**Example Response** (200 OK):\n\n``` json\n{\n  \"message\": \"Book deleted successfully\"\n}\n\n ```\n\n**Error Handling**:\n\n- 404 Not Found: If the book with the specified ID does not exist\n    \n- 500 Internal Server Error: If there's an issue with the server"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "ENDPOINT_BOOKS",
+			"value": "books",
+			"type": "string"
+		}
+	]
+}

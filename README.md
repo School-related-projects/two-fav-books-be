@@ -118,8 +118,9 @@ Bij het documenteren van je API dien je aandacht te besteden aan de volgende asp
 - Voorbeeld van een Response en het schema/error-handling
 - Authenticatieprotocollen (eventueel)
 
-**Documenteer je API's volgens het voorbeeld hieronder:**
-![img.png](img.png)
+**Documentatie API's:**
+
+![img_2.png](img_2.png)
 
 ## Stap 6: Implementeer de API in een back-end framework
 
