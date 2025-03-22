@@ -120,64 +120,7 @@ Bij het documenteren van je API dien je aandacht te besteden aan de volgende asp
 
 **Documentatie API's:**
 
-Section	Description
-Description	This API manages a collection of favorite books
-Authentication	None required
-Base URL 	http://localhost:8000/api
-
-##### Endpoints	
-- /api/books: Get all books (GET), add a new book (POST)
-- /api/books/:id: Get specific book (GET), update a book (PUT), delete a book (DELETE)
-  Resource model	- books: id, title, author, year, genre, summary, cover
-  Request Method	GET, POST, PUT, DELETE
-  Parameters	- /api/books (GET): None
-- /api/books (POST): Book data in the request body
-- /api/books/:id (GET): id path parameter
-- /api/books/:id (PUT): id path parameter and updated fields in request body
-- /api/books/:id (DELETE): id path parameter
-  Response Format	JSON
-  Error Handling	- 200 OK: Successful response
-- 201 Created: Book successfully created
-- 400 Bad Request: Invalid request data
-- 404 Not Found: Book not found 
-- 500 Internal Server Error: Server issue
-
-##### Example Requests/Responses	
-- Request: GET /api/books
-Response:
-`  [{
-  "id":"1678954321",
-  "title":"To Kill a Mockingbird",
-  "author":"Harper Lee",
-  "year":1960,
-  "genre":"Fiction"
-  }]`
-- Request: GET /api/books/13
-- Response:
-`  {
-  "id":"13",
-  "title":"To Kill a Mockingbird",
-  "author":"Harper Lee"
-  }`
-- Request: POST /api/books
-- Request Body:
-`  {
-  "title":"The Great Gatsby",
-  "author":"F. Scott Fitzgerald"
-  }`
-- Response:
-`  {
-  "id":"1678954323","title":"The Great Gatsby"
-  }`
-- Request: PUT /api/books/:id
-- Request Body:
-`  {
-  "genre":"Psychological Fiction"
-  }`
-- Response: Updated book object
-- Request: DELETE /api/books/:id
-- Response:` {"message":"Book deleted successfully"}`
-
+![img_2.png](img_2.png)
 
 ## Stap 6: Implementeer de API in een back-end framework
 
