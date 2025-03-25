@@ -3,6 +3,58 @@ const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Book:
+ *       type: object
+ *       required:
+ *         - title
+ *         - author
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The auto-generated id of the book
+ *         title:
+ *           type: string
+ *           description: The book title
+ *         author:
+ *           type: string
+ *           description: The book author
+ *         year:
+ *           type: integer
+ *           description: Publication year
+ *         genre:
+ *           type: string
+ *           description: Book genre
+ *         summary:
+ *           type: string
+ *           description: Brief summary of the book
+ *         cover:
+ *           type: string
+ *           description: URL to the book cover image
+ *       example:
+ *         id: "1678923456789"
+ *         title: "The Great Gatsby"
+ *         author: "F. Scott Fitzgerald"
+ *         year: 1925
+ *         genre: "Classic"
+ *         summary: "A story of wealth, class, love and illusion in the Jazz Age"
+ *         cover: "/resources/images/gatsby.png"
+ *   responses:
+ *     NotFound:
+ *       description: The book was not found
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: Book not found
+ */
+
 // Function to read books from JSON file
 const getBooksData = () => {
     try {
@@ -71,7 +123,31 @@ const saveBooksData = (booksData) => {
 module.exports = (app) => {
     app.use('/api/books', router);
 
-    // Get all books
+    /**
+     * @swagger
+     * tags:
+     *   name: Books
+     *   description: The books managing API
+     */
+
+    /**
+     * @swagger
+     * /api/books:
+     *   get:
+     *     summary: Returns the list of all books
+     *     tags: [Books]
+     *     responses:
+     *       200:
+     *         description: The list of books
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Book'
+     *       500:
+     *         description: Server error
+     */
     router.get('/', (_req, res) => {
         try {
             const data = getBooksData();
@@ -83,7 +159,31 @@ module.exports = (app) => {
         }
     });
 
-    // Get book by ID
+    /**
+     * @swagger
+     * /api/books/{id}:
+     *   get:
+     *     summary: Get a book by ID
+     *     tags: [Books]
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         schema:
+     *           type: string
+     *         required: true
+     *         description: The book ID
+     *     responses:
+     *       200:
+     *         description: The book description by ID
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Book'
+     *       404:
+     *         $ref: '#/components/responses/NotFound'
+     *       500:
+     *         description: Server error
+     */
     router.get('/:id', (req, res) => {
         try {
             const data = getBooksData();
@@ -100,7 +200,30 @@ module.exports = (app) => {
         }
     });
 
-    // Add a new book
+    /**
+     * @swagger
+     * /api/books:
+     *   post:
+     *     summary: Create a new book
+     *     tags: [Books]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/Book'
+     *     responses:
+     *       201:
+     *         description: The book was successfully created
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Book'
+     *       400:
+     *         description: Missing required fields
+     *       500:
+     *         description: Server error
+     */
     router.post('/', (req, res) => {
         try {
             console.log('Received POST request with body:', req.body);
@@ -148,7 +271,36 @@ module.exports = (app) => {
         }
     });
 
-    // Update a book
+    /**
+     * @swagger
+     * /api/books/{id}:
+     *   put:
+     *     summary: Update a book by ID
+     *     tags: [Books]
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         schema:
+     *           type: string
+     *         required: true
+     *         description: The book ID
+     *     requestBody:
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/Book'
+     *     responses:
+     *       200:
+     *         description: The book was updated
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Book'
+     *       404:
+     *         $ref: '#/components/responses/NotFound'
+     *       500:
+     *         description: Server error
+     */
     router.put('/:id', (req, res) => {
         try {
             const data = getBooksData();
@@ -182,7 +334,27 @@ module.exports = (app) => {
         }
     });
 
-    // Delete a book
+    /**
+     * @swagger
+     * /api/books/{id}:
+     *   delete:
+     *     summary: Remove a book by ID
+     *     tags: [Books]
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         schema:
+     *           type: string
+     *         required: true
+     *         description: The book ID
+     *     responses:
+     *       200:
+     *         description: The book was deleted
+     *       404:
+     *         $ref: '#/components/responses/NotFound'
+     *       500:
+     *         description: Server error
+     */
     router.delete('/:id', (req, res) => {
         try {
             const data = getBooksData();

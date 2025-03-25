@@ -1,6 +1,6 @@
-    const expressLoader = require('./express.js');
+const expressLoader = require('./express.js');
 const routeLoader = require('../routes/books');
-// const swaggerLoader = require('./swagger');
+const swaggerLoader = require('./swagger');
 
 module.exports = async (app) => {
     try {
@@ -10,9 +10,11 @@ module.exports = async (app) => {
 
         // Load API route handlers
         routeLoader(app);
+        console.log('API routes loaded');
 
-        // // Load Swagger
-        // swaggerLoader(app);
+        // Load Swagger
+        swaggerLoader(app);
+        console.log('Swagger documentation initialized');
 
         // Error Handler
         app.use((err, req, res, next) => {
