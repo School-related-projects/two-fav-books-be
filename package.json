@@ -1,10 +1,11 @@
 {
   "name": "two-fav-books-be",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "description": "A simple books API with Express and Swagger",
+  "main": "server.js",
   "scripts": {
-    "start": "./server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
@@ -12,7 +13,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "express-session": "^1.18.1"
+    "express-session": "^1.18.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   },
   "browserslist": {
     "production": [
